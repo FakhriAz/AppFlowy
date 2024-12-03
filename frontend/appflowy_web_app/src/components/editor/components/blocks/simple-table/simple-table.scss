@@ -97,4 +97,11 @@
   td {
     @apply px-2 py-0.5;
   }
+
+  &.selected {
+    table {
+      @apply bg-content-blue-50 border border-fill-default;
+    }
+    
+  }
 }

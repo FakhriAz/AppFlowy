@@ -57,6 +57,7 @@ const SimpleTableRow =
           ref={ref}
           {...attributes}
           data-table-row={blockId}
+
           data-table-row-horizontal-align={align?.toLowerCase()}
           style={{
             ...attributes.style,

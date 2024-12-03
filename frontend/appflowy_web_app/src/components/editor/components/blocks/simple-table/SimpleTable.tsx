@@ -1,9 +1,11 @@
+import { useSimpleTable } from '@/components/editor/components/blocks/simple-table/SimpleTable.hooks';
 import { EditorElementProps, SimpleTableNode, SimpleTableRowNode } from '@/components/editor/editor.type';
 import { useEditorContext } from '@/components/editor/EditorContext';
 import TableContainer from '@/components/editor/components/table-container/TableContainer';
 import isEqual from 'lodash-es/isEqual';
 import React, { forwardRef, memo, useMemo } from 'react';
 import './simple-table.scss';
+// import { useReadOnly } from 'slate-react';
 
 const MIN_WIDTH = 120;
 
@@ -46,9 +48,10 @@ const SimpleTable = memo(
         ))}
       </colgroup>;
     }, [columns]);
+    const { isIntersection } = useSimpleTable(node);
 
     const className = useMemo(() => {
-      const classList = ['simple-table', 'appflowy-scroller'];
+      const classList = ['simple-table', 'appflowy-scroller', 'select-none'];
 
       if (classNameProp) {
         classList.push(classNameProp);
@@ -62,14 +65,21 @@ const SimpleTable = memo(
         classList.push('enable-header-row');
       }
 
+      if (isIntersection) {
+        classList.push('selected');
+      }
+
       return classList.join(' ');
-    }, [classNameProp, enable_header_column, enable_header_row]);
+    }, [classNameProp, enable_header_column, enable_header_row, isIntersection]);
+
+    // const readOnly = useReadOnly();
 
     return (
       <div
         ref={ref}
         {...attributes}
         className={className}
+        contentEditable={false}
       >
         <TableContainer
           blockId={blockId}

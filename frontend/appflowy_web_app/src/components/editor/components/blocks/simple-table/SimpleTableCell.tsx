@@ -81,7 +81,9 @@ const SimpleTableCell =
             backgroundColor: bgColor ? renderColor(bgColor) : undefined,
           }}
         >
-          <div className={'cell-children'}>
+          <div
+            className={'cell-children'}
+          >
             {children}
           </div>
         </td>
